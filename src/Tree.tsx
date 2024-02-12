@@ -188,11 +188,7 @@ export const Tree = (
     <svg
       width={width}
       height={height}
-      style={{
-        background: "white",
-        fontFamily: "sans-serif",
-        overflow: "visible",
-      }}
+      className="bg-white font-sans overflow-visible"
       xmlns="http://www.w3.org/2000/svg"
     >
       <defs>
@@ -219,14 +215,7 @@ export const Tree = (
         return (
           <g
             key={data.path}
-            style={{
-              fill: doHighlight
-                ? isHighlighted ? "#FCE68A" : "#ECEAEB"
-                : data.color,
-              transition: `transform ${isHighlighted ? "0.5s" : "0s"
-                } ease-out, fill 0.1s ease-out`,
-              // opacity: doHighlight && !isHighlighted ? 0.6 : 1,
-            }}
+            className={`fill-current transition-transform ${isHighlighted ? 'duration-500' : 'duration-0'} ease-out transition-fill duration-100 ease-out`}
             transform={`translate(${x}, ${y})`}
           >
             {isParent
@@ -234,7 +223,7 @@ export const Tree = (
                 <>
                   <circle
                     r={r}
-                    style={{ transition: "all 0.5s ease-out" }}
+                    className="transition-all duration-500 ease-out"
                     stroke="#290819"
                     strokeOpacity="0.2"
                     strokeWidth="1"
@@ -244,10 +233,7 @@ export const Tree = (
               )
               : (
                 <circle
-                  style={{
-                    filter: isHighlighted ? "url(#glow)" : undefined,
-                    transition: "all 0.5s ease-out",
-                  }}
+                  className={`transition-all duration-500 ease-out ${isHighlighted ? 'filter-glow' : ''}`}
                   r={runningR}
                   strokeWidth={selectedNodeId === data.path ? 3 : 0}
                   stroke="#374151"
@@ -277,11 +263,11 @@ export const Tree = (
         return (
           <g
             key={data.path}
-            style={{ pointerEvents: "none", transition: "all 0.5s ease-out" }}
+            className="pointer-events-none transition-all duration-500 ease-out"
             transform={`translate(${x}, ${y})`}
           >
             <CircleText
-              style={{ fontSize, transition: "all 0.5s ease-out" }}
+              className="transition-all duration-500 ease-out" style={{ fontSize }}
               r={Math.max(20, offsetR - 3)}
               fill="#374151"
               stroke="white"
@@ -290,7 +276,7 @@ export const Tree = (
               text={label}
             />
             <CircleText
-              style={{ fontSize, transition: "all 0.5s ease-out" }}
+              className="transition-all duration-500 ease-out" style={{ fontSize }}
               fill="#374151"
               rotate={depth * 1 - 0}
               r={Math.max(20, offsetR - 3)}
@@ -324,22 +310,11 @@ export const Tree = (
         return (
           <g
             key={data.path}
-            style={{
-              fill: doHighlight
-                ? isHighlighted ? "#FCE68A" : "#29081916"
-                : data.color,
-              transition: `transform ${isHighlighted ? "0.5s" : "0s"} ease-out`,
-            }}
+            className={`fill-current transition-transform ${isHighlighted ? 'duration-500' : 'duration-0'} ease-out`}
             transform={`translate(${x}, ${y})`}
           >
             <text
-              style={{
-                pointerEvents: "none",
-                opacity: 0.9,
-                fontSize: "14px",
-                fontWeight: 500,
-                transition: "all 0.5s ease-out",
-              }}
+              className="pointer-events-none opacity-90 text-base font-medium transition-all duration-500 ease-out" style={{ fontSize: "14px" }}
               fill="#4B5563"
               textAnchor="middle"
               dominantBaseline="middle"
@@ -350,27 +325,14 @@ export const Tree = (
               {label}
             </text>
             <text
-              style={{
-                pointerEvents: "none",
-                opacity: 1,
-                fontSize: "14px",
-                fontWeight: 500,
-                transition: "all 0.5s ease-out",
-              }}
+              className="pointer-events-none opacity-100 text-base font-medium transition-all duration-500 ease-out" style={{ fontSize: "14px" }}
               textAnchor="middle"
               dominantBaseline="middle"
             >
               {label}
             </text>
             <text
-              style={{
-                pointerEvents: "none",
-                opacity: 0.9,
-                fontSize: "14px",
-                fontWeight: 500,
-                mixBlendMode: "color-burn",
-                transition: "all 0.5s ease-out",
-              }}
+              className="pointer-events-none opacity-90 text-base font-medium mix-blend-color-burn transition-all duration-500 ease-out" style={{ fontSize: "14px" }}
               fill="#110101"
               textAnchor="middle"
               dominantBaseline="middle"
@@ -446,7 +408,7 @@ const Legend = ({ fileTypes = [], fileColors}) => {
           />
           <text
             x="10"
-            style={{ fontSize: "14px", fontWeight: 300 }}
+            className="text-base font-light" style={{ fontSize: "14px" }}
             dominantBaseline="middle"
           >
             .{extension}
